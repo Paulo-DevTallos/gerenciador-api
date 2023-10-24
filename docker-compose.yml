@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    entrypoint: sh ./.docker/entrypoint.sh
+    container_name: backend-usuarios
+    ports:
+      - 3060:3060
+    restart: always
+    volumes:
+      - .:/home/node/app
+    tty: true
+    networks: 
+      - projeto-gerenciador-funcionarios
+networks:
+  projeto-gerenciador-funcionarios:
+    driver: bridge
