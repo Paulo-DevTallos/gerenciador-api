@@ -13,6 +13,23 @@ services:
     tty: true
     networks: 
       - projeto-gerenciador-funcionarios
+
+  db:
+    image: mongo:4.4
+    container_name: db
+    ports:
+      - 27017:27017
+    volumes:
+      - /mongodb/dbdata:/data/db
+      - /mongodb/configdb:/data/configdb
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: user-database
+    networks: 
+      - projeto-gerenciador-funcionarios
+
 networks:
   projeto-gerenciador-funcionarios:
     driver: bridge
